@@ -28,7 +28,7 @@ public class CreateUser extends HttpServlet {
         // TODO Auto-generated constructor stub
     } 
     
-    @Resource(name="jdbc/social")
+    @Resource(name="jdbc/abhinstestschema")
     private DataSource datasource;
     private UserDBUtil userdb;
 
