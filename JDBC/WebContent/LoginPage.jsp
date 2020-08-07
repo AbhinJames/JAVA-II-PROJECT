@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="tag" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -77,6 +78,15 @@ span.pass {
 </head>
 <body>
 
+<tag:if test="${rerror}">
+		<h1>Something went wrong, try again later</h1>
+	</tag:if>
+	
+	<tag:if test="${lerror}">
+		<h1>wrong email or password</h1>
+	</tag:if>
+
+
 <h2>Login Page</h2>
 
 <form action="Login" method="POST">
@@ -89,7 +99,7 @@ span.pass {
     <input type="email" placeholder="Enter Your Email ID" name="email" required>
 
     <label for="pass"><b>Password</b></label>
-    <input type="text" placeholder="Enter Password" name="pass" required>
+    <input type="password" placeholder="Enter Password" name="pass" required>
         
     <button type="submit">Login</button>
     <button type="submit" formaction="SignUp.jsp" formnovalidate>Sign Up</button><br>
