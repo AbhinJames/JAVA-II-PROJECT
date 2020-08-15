@@ -16,10 +16,13 @@
 	
 	<h3> 
 	
-		${user.getFname()} ${user.getLname()} 
-		
-	
+		${user.getFname()} ${user.getLname()}
 	 </h3>
+	 
+	 <form action="CreatePost" method="get">
+	 <input type="text" name="postContent">
+	 <input type="Submit" value="Create Post">
+	</form>
 	
 </body>
 </html>

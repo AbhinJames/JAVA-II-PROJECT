@@ -76,7 +76,7 @@ public class UserDBUtil {
 				String tempEmail = res.getString("email");
 				String pass = res.getString("pass");
 				
-				tempUser = new User(fname,lname,email,pass);
+				tempUser = new User(fname,lname,tempEmail,pass);
 			}
 			
 			return tempUser;

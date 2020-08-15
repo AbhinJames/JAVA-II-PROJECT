@@ -2,11 +2,17 @@ package model;
 
 import db.UserDBUtil;
 
+import java.util.ArrayList;
+
+import db.PostDBUtil;
+
 public class User {
 	String fname;
 	String lname;
 	String email;
 	String pass;
+	
+	ArrayList<Post> userPosts;
 	
 	public User(String fname, String lname, String email, String pass){
 		this.fname = fname;
@@ -101,6 +107,29 @@ public class User {
 		try {
 			 userdb.insertUser(this);
 			 return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	
+	public boolean createPost(PostDBUtil postsdb,Post post) {
+		try {
+			postsdb.insertPost(post);
+			return true;
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return false;
+	}
+	
+	public boolean getUserPosts(PostDBUtil postsdb) {
+		try {
+			this.userPosts =  postsdb.getAllPostsByUser(this.email);
+			return true;
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

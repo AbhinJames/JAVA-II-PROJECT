@@ -80,7 +80,7 @@ span.psw {
 
 <h2>Registration Form</h2>
 
-<form action="        " method="post">
+<form action="CreateUser" method="post">
   <div class="imgcontainer">
     <img src="C:\Users\nperla\Desktop\java script\JAVA-EE-PROJECT\WebContent\img_avatar2.png" alt="Avatar" class="avatar">
   </div>

@@ -74,7 +74,7 @@ public class Login extends HttpServlet {
 		}else {
 			//redirect to index page in user in registered with an error
 			
-			RequestDispatcher dispatch = request.getRequestDispatcher("LoginPage.jsp");
+			RequestDispatcher dispatch = request.getRequestDispatcher("index.jsp");
 			request.setAttribute("lerror", true);
 			dispatch.forward(request, response);
 		}
