@@ -1,6 +1,7 @@
 package controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -75,6 +76,10 @@ public class CreatePost extends HttpServlet {
 		boolean created = tempPost.createPost(postsdb);
 
 		if (created) {
+            ArrayList<Post> allPostsList = tempPost.getAllPosts(postsdb);
+            ArrayList<Post> myPostsList = tempPost.getAllPostsByUser(postsdb);
+            session.setAttribute("myPostsList", myPostsList);
+            session.setAttribute("allPostsList", allPostsList);
 			response.sendRedirect("home.jsp");
 		} else {
 			RequestDispatcher dispatch = request.getRequestDispatcher("profile.jsp");

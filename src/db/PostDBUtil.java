@@ -69,7 +69,7 @@ public class PostDBUtil {
 
 			conn = this.datasource.getConnection();
 
-			String sql = String.format("UPDATE post " + " SET  content=%s WHERE postID=%d",
+			String sql = String.format("UPDATE post " + " SET  content=%s WHERE postId=%d",
 					postContent, postID);
 
 			stmt = conn.createStatement();
@@ -165,11 +165,12 @@ public class PostDBUtil {
 
 			conn = this.datasource.getConnection();
 
-			String sql = String.format("DELETE FROM post WHERE postID=%d", post.getPostID());
+			String sql = "DELETE FROM post WHERE postId= ?";
 
-			stmt = conn.createStatement();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, post.getPostID());
 
-			stmt.executeUpdate(sql);
+			pstmt.executeUpdate(sql);
 
 		} finally {
 			// TODO: handle finally clause
@@ -184,22 +185,22 @@ public class PostDBUtil {
 		PreparedStatement pstmt = null;
 		ResultSet res = null;
 
-		ArrayList<Post> tempPosts = null;
+		ArrayList<Post> tempPosts = new ArrayList<Post>();
 
 		try {
 
 			conn = this.datasource.getConnection();
 
-			String sql = String.format("SELECT postID,email,content, COUNT(likesCounter) FROM post inner join likes on likes.postID = post.postID");
+			String sql = String.format("SELECT * FROM post");
 
 			pstmt = conn.prepareStatement(sql);
 
 			res = pstmt.executeQuery();
 			while (res.next() != false) {
-				int postID = res.getInt("postID");
+				int postID = res.getInt("postId");
 				String postContent = res.getString("content");
 				String userEmail = res.getString("email");
-				int likes = res.getInt("likesCounter");
+				int likes = res.getInt("likes");
 				tempPosts.add(new Post(postID,postContent,userEmail,likes));
 			}
 
@@ -218,23 +219,24 @@ public class PostDBUtil {
 		PreparedStatement pstmt = null;
 		ResultSet res = null;
 
-		ArrayList<Post> tempPosts = null;
+		ArrayList<Post> tempPosts = new ArrayList<Post>();
 
 		try {
 
 			conn = this.datasource.getConnection();
 
-			String sql = String.format(
-					"SELECT postID,content,email, COUNT(likesCounter) FROM post inner join likes " + "on likes.postID = post.postID WHERE email=%s", userEmail);
+			String sql = "SELECT * FROM post WHERE email= ?";
 
 			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, userEmail);
 
 			res = pstmt.executeQuery();
 			while (res.next() != false) {
 				int postID = res.getInt("postID");
 				String postContent = res.getString("content");
 				String email = res.getString("email");
-				int likes = res.getInt("likesCounter");
+				int likes = res.getInt("likes");
 				tempPosts.add(new Post(postID,postContent, email,likes));
 			}
 

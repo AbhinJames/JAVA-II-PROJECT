@@ -1,5 +1,7 @@
 package model;
 
+import java.util.ArrayList;
+
 import db.PostDBUtil;
 
 public class Post {
@@ -63,6 +65,36 @@ public class Post {
 		}
 		return false;
 	}
+	
+	public ArrayList<Post> getAllPosts(PostDBUtil postDbUtil) {
+	       
+        ArrayList<Post> postList = new ArrayList<Post>();
+       
+        try {
+             postList = postDbUtil.getAllPosts();
+            
+        } catch (Exception e) {
+           
+            e.printStackTrace();
+        }
+       
+        return postList;
+    }
+	
+	public ArrayList<Post> getAllPostsByUser(PostDBUtil postDbUtil) {
+	       
+        ArrayList<Post> postList = new ArrayList<Post>();
+       
+        try {
+             postList = postDbUtil.getAllPostsByUser(this.userEmail);
+            
+        } catch (Exception e) {
+           
+            e.printStackTrace();
+        }
+       
+        return postList;
+    }
 
 	public boolean deletePost() {
 		return true;
